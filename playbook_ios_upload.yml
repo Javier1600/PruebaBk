@@ -1,0 +1,12 @@
+---
+- name: "Copiar software al equipo"
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: "Copiar software al equipo"
+    net_put: 
+      src: "c890-universalk9-mz.157-3.M4a.bin"
+      dest: "flash:/c890-universalk9-mz.157-3.M4a.bin"
+    vars: 
+      ansible_command_timeout: 600

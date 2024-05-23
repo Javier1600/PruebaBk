@@ -1,0 +1,341 @@
+enable
+1971974_1971975_SONORAMA_OF_CERRO_CARMEN#Gesti00n.&.PN3T
+% Bad IP address or host name% Unknown command or computer name, or unable to find computer address
+1971974_1971975_SONORAMA_OF_CERRO_CARMEN#show running-config
+Building configuration...
+
+Current configuration : 11166 bytes
+!
+! Last configuration change at 06:05:19 UTC Wed May 22 2024
+!
+version 17.3
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec
+service password-encryption
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform hardware throughput crypto 50000
+!
+hostname 1971974_1971975_SONORAMA_OF_CERRO_CARMEN
+!
+boot-start-marker
+boot-end-marker
+!
+!
+security authentication failure rate 2 log
+ --More--         security passwords min-length 12
+logging buffered 16384 informational
+logging console critical
+no logging monitor
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+!
+ip vrf datos
+ rd 2:2
+ route-target export 2:2
+ route-target import 2:2
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name puntonet.ec
+ip admission max-login-attempts 3
+ip dhcp bootp ignore
+ --More--         !
+!
+!
+login block-for 100 attempts 5 within 60
+login delay 5
+login on-failure log
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+no device-tracking logging theft
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2504673907
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2504673907
+ --More--          revocation-check none
+ rsakeypair TP-self-signed-2504673907
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-2504673907
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32353034 36373339 3037301E 170D3233 30373133 31373330 
+  33375A17 0D333330 37313231 37333033 375A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 35303436 
+  37333930 37308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 01008A2C BFB8AD75 981C74DF E8B9E34E E2564324 CABFF2AD 7A566EBB 
+  057B181D 9B12F5F2 BE4C4994 FB77065B 0A7AA770 A8365E86 E7C91DC9 B4B95283 
+  44E778EC E1C85100 6D0EA698 2C36F915 92C00015 72722A74 66386EC1 7A651795 
+  BFE2CF16 4D3A6104 F2A7311A 2FF3A256 ECB999A3 A9C853B6 E74B6BEB 202C6C37 
+  E53138CD 72D0F78C 2E96348F DB740469 9D89D2FE 79E39D4A DEA6C43B A6CE07D4 
+  4DE6803B 38C2E114 0A763805 FE09A18A 01289D20 386D6BDA 71C0C23D C730DE7C 
+  23F5CA6E 346C0049 9D72F102 2EE9EC3C AA67433B 297882B6 BF189AB6 E0748BE5 
+ --More--           C5C4DC41 22EA1A66 6C421356 AFAB6028 04DAA742 6DB467CF 6EB45B70 87411529 
+  D1C207CA 2B370203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 145F568C DB5E24F3 D17611A4 477FDC57 B371078D 
+  E9301D06 03551D0E 04160414 5F568CDB 5E24F3D1 7611A447 7FDC57B3 71078DE9 
+  300D0609 2A864886 F70D0101 05050003 82010100 37BE70BF 2BE70A0B 9864F81E 
+  75811AE8 FCB048F2 638F1798 F8BCE34C 82AA4DC7 6894EC04 D0524793 3DB36B8A 
+  5EBD90D1 315FC358 0ED23F59 9F1A6D65 0B1B7E59 9F50C27F BA5FD728 8F2E6DFB 
+  B19F3CE5 8A58F403 D0DC9454 EAED726D CF72F4F9 69500460 FAFC8C6B 5B504921 
+  F8B61104 97A9672F F78590D6 E0448782 1637AA57 65548057 A81691D7 822A66FE 
+  919FAF8A 1C0DA5BF 6551D1BA 7566ADE1 0F7830B0 CF6AAB4A BE591BB2 FC47C71B 
+  6813A395 C2DB15D7 CB044A40 EEFFAAB0 5A4C596D 11D1DE86 68E3FCCF 999DCBB9 
+  8FCCC059 98E88E2E 24B0695E 9045EB2F 8BEE2660 990A8E5A A735B9AF C3F3365B 
+  99166881 875B9A86 8F96D34F 66F8DB00 3A8B7CD4
+  	quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+ --More--           CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+!
+license udi pid C1111-4P sn FGL2709M988
+ --More--         memory free low-watermark processor 69583
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+username @1814504CORPgye privilege 15 secret 9 $9$6Umx6RVpNH5pQk$9KF0Z04zxi0/Tmtp/ZTbCL.T6GIjSLkyCDOef8TM8oY
+username @1814516CORPgye privilege 15 secret 9 $9$k9Zv6eO7UyiSV.$yf55lVSPOsY95Hwe6CyYfCrw5vFJv8Mxp/ogHJ.CQXY
+username operador privilege 15 secret 9 $9$g0vVcVnZFsH9vE$3.y.Sdb6LXk6KbYTi3iEgeXyoGErLcLl72labhr0u42
+username svc_cisco privilege 15 secret 8 $8$WbofoOO/XBebO.$bWkYUUD6H4OEzVXzwuKSR.v5FlEz.J1om/0x2s5XPWU
+username cisco_smart_licensing privilege 15 secret 9 $9$xubXMl2k4b3twk$ey.Ef6j0amlZIeZD082xBDYAoCOIOc2SSfVD.42itW.
+username 89fgvfg privilege 15 secret 9 $9$wxJW2ZlLxdmFt.$QeAk6h9Ps30ojx8h6NbPs1P6ldNvEaw8gw7Xn5LZdxg
+username @1971974CORPgye privilege 15 secret 9 $9$N00Ou3vjrkDTZE$iYRoGR.rrsoGpdJJaCGJltbSE3z30JfHipzJUYLg63w
+username @1971975CORPgye privilege 15 secret 9 $9$1Ii2A/KZSMkznk$sdh2gHv9QPf/JCdpB0CnMrBEQvwibdqHu4etCPSvVYM
+!
+ --More--         redundancy
+ mode none
+!
+!
+vlan internal allocation policy ascending
+!
+!
+policy-map BW_WAN_11M
+ class class-default
+  police cir 11000000 conform-action transmit  exceed-action drop 
+policy-map BW_WAN_25M
+ class class-default
+  police cir 25000000 conform-action transmit  exceed-action drop 
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ description WAN_PNET
+ no ip address
+ negotiation auto
+ --More--         !
+interface GigabitEthernet0/0/0.88
+ description WAN_INT
+ encapsulation dot1Q 88
+ ip address 192.168.168.74 255.255.255.252
+ ip access-group 107 in
+ service-policy input BW_WAN_25M
+ service-policy output BW_WAN_25M
+!
+interface GigabitEthernet0/0/0.99
+ description WAN_DAT
+ encapsulation dot1Q 99
+ ip vrf forwarding datos
+ ip address 10.4.163.6 255.255.255.252
+ service-policy input BW_WAN_11M
+ service-policy output BW_WAN_11M
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/1/0
+ --More--          description PUBLICA
+ switchport access vlan 10
+ switchport mode access
+!
+interface GigabitEthernet0/1/1
+ description PUBLICA
+ switchport access vlan 10
+ switchport mode access
+!
+interface GigabitEthernet0/1/2
+ description LAN_DATOS
+ switchport access vlan 20
+ switchport mode access
+!
+interface GigabitEthernet0/1/3
+ description LAN_DATOS
+ switchport access vlan 20
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ --More--         interface Vlan10
+ description PUBLICA
+ ip address 190.110.223.193 255.255.255.248
+!
+interface Vlan20
+ description DATOS
+ ip vrf forwarding datos
+ ip address 192.168.1.1 255.255.255.0
+!
+no ip http server
+no ip http secure-server
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 192.168.168.73 name RUTA_POR_DEFECTO_INT
+ip route vrf datos 0.0.0.0 0.0.0.0 10.4.163.5 name RUTA_POR_DEFECTO_DAT
+ip ssh authentication-retries 5
+ip ssh version 2
+!
+!
+ip access-list extended accesoSSH
+ 10 permit tcp host 190.12.35.242 any eq 22
+ 20 permit tcp host 190.12.37.22 any eq 22
+ 30 permit tcp host 190.12.5.5 any eq 22
+ 40 permit tcp host 190.12.14.8 any eq 22
+ --More--          50 permit tcp host 190.12.9.58 any eq 22
+ 60 permit tcp host 200.105.239.5 any eq 22
+ 70 permit tcp host 200.105.237.18 any eq 22
+ 80 permit tcp host 190.12.56.2 any eq 22
+ 90 permit tcp host 190.12.61.10 any eq 22
+ 100 permit tcp host 190.110.218.19 any eq 22
+ 110 permit tcp host 179.49.26.182 any eq 22
+ 120 permit tcp host 192.168.177.98 any eq 22
+ 130 permit tcp host 192.168.73.241 any eq 22
+ 140 permit tcp host 10.4.101.1 any eq 22
+ 150 permit tcp host 192.168.189.141 any eq 22
+ 160 permit tcp 200.105.225.0 0.0.0.255 any eq 22
+ 170 permit tcp 200.105.224.136 0.0.0.7 any eq 22
+ 180 deny   tcp any any eq 22
+!
+ip access-list standard 1300
+ 110 permit 200.105.225.75
+ 160 permit 190.110.195.82
+ 100 permit 200.105.225.7
+ 60 permit 200.105.237.5
+ 70 permit 200.105.237.6
+ 20 permit 190.12.35.242
+ 120 permit 200.105.225.51
+ --More--          130 permit 200.105.228.198
+ 80 permit 190.12.32.22
+ 180 permit 190.12.32.31
+ 40 permit 190.12.32.2
+ 150 permit 190.12.14.2
+ 50 permit 190.57.137.197
+ 170 permit 190.110.195.202
+ 90 permit 190.57.153.230
+ 10 permit 190.12.32.107
+ 30 permit 200.105.224.136 0.0.0.7
+ 140 permit 200.105.239.0 0.0.0.31
+ 190 deny   any
+ip access-list extended 107
+ 10 deny   udp any eq ntp any eq ntp
+ 20 permit ip any any
+!
+snmp-server community Puntonet.corp RO
+!
+!
+control-plane
+!
+banner exec ^CCC
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+ --More--            You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner login ^CCC
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner motd ^CCC
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+ --More--         Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+!
+line con 0
+ transport input none
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+ --More--         !
+!
+!
+!
+!
+!
+end
+
+1971974_1971975_SONORAMA_OF_CERRO_CARMEN#      

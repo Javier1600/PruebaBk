@@ -1,0 +1,314 @@
+enable
+Password: 
+1808439_ECOILPET#show running-config
+Building configuration...
+
+Current configuration : 6178 bytes
+!
+version 15.3
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec
+service password-encryption
+!
+hostname 1808439_ECOILPET
+!
+boot-start-marker
+boot-end-marker
+!
+aqm-register-fnf
+!
+security authentication failure rate 5 log
+security passwords min-length 12
+logging buffered 16384 informational
+logging console critical
+no logging monitor
+ --More--         enable secret 5 $1$Kga3$M67IMPTJ/vwhJPQuo2rLg/
+!
+aaa new-model
+aaa local authentication attempts max-fail 3
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone ECUADOR -5 0
+!
+!
+no ip source-route
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+
+ --More--         
+!
+ip dhcp bootp ignore
+!
+!
+!
+no ip bootp server
+no ip domain lookup
+ip domain name puntonet.ec
+ip cef
+login block-for 100 attempts 5 within 60
+login delay 5
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+ --More--         !
+!
+!
+!
+license udi pid CISCO891-K9 sn FTX181883B8
+!
+!
+username @1784606CORPgye privilege 15 secret 5 $1$EIMU$43tZQzuS5Qw/BCLtFLpCE/
+username operador privilege 15 secret 5 $1$ZJrn$s8ga/t54.BJ.B2o9VGQ3C0
+username @1808439CORPgye privilege 15 secret 5 $1$bdzP$9wXjTgrT.JpPqiP303RXt.
+!
+redundancy
+!
+!
+!
+!
+!
+ip tcp synwait-time 5
+! 
+!
+!
+!
+!
+ --More--         !
+!
+!
+!
+interface FastEthernet0
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet1
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet2
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet3
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+ --More--         !
+interface FastEthernet4
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet5
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet6
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet7
+ description PUBLICA
+ switchport access vlan 10
+ no ip address
+!
+interface FastEthernet8
+ description WAN_BACKUP
+ --More--          ip address 192.168.166.10 255.255.255.252
+ ip access-group 107 in
+ no ip redirects
+ no ip proxy-arp
+ duplex auto
+ speed auto
+ ntp disable
+!
+interface GigabitEthernet0
+ description WAN_PUNTONET
+ ip address 192.168.165.238 255.255.255.252
+ ip access-group 107 in
+ no ip redirects
+ no ip proxy-arp
+ duplex auto
+ speed auto
+ ntp disable
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan10
+ description PUBLICA
+ --More--          ip address 190.12.23.225 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ no autostate
+ ntp disable
+!
+interface Async1
+ no ip address
+ encapsulation slip
+!
+router bgp 64700
+ bgp router-id 192.168.165.238
+ bgp log-neighbor-changes
+ neighbor 192.168.165.237 remote-as 65001
+ neighbor 192.168.165.237 description PRINCIPAL
+ neighbor 192.168.165.237 password 7 00341D55100F585E5F76081F51495D434152
+ neighbor 192.168.166.9 remote-as 65001
+ neighbor 192.168.166.9 description BACKUP
+ neighbor 192.168.166.9 password 7 1522055F107E787C78647173445F42555100
+ !
+ address-family ipv4
+  network 190.12.23.224 mask 255.255.255.252
+  redistribute connected
+ --More--           redistribute static
+  neighbor 192.168.165.237 activate
+  neighbor 192.168.165.237 route-map PRINCIPAL-IN in
+  neighbor 192.168.166.9 activate
+  neighbor 192.168.166.9 route-map BACKUP-IN in
+  neighbor 192.168.166.9 route-map BACKUP-OUT out
+ exit-address-family
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip ssh time-out 60
+ip ssh authentication-retries 5
+ip ssh version 2
+!
+ip access-list extended accesoSSH
+ permit tcp host 190.12.35.242 any eq 22
+ permit tcp host 190.12.37.22 any eq 22
+ permit tcp host 190.12.5.5 any eq 22
+ permit tcp host 190.12.14.8 any eq 22
+ permit tcp host 190.12.9.58 any eq 22
+ --More--          permit tcp host 200.105.239.5 any eq 22
+ permit tcp host 200.105.237.18 any eq 22
+ permit tcp host 190.12.56.2 any eq 22
+ permit tcp host 190.12.61.10 any eq 22
+ permit tcp host 190.110.218.19 any eq 22
+ permit tcp host 179.49.26.182 any eq 22
+ permit tcp host 192.168.177.98 any eq 22
+ permit tcp host 192.168.166.9 any eq 22
+ permit tcp host 192.168.165.237 any eq 22
+ permit tcp 200.105.225.0 0.0.0.255 any eq 22
+ permit tcp 200.105.224.136 0.0.0.7 any eq 22
+ deny   tcp any any eq 22
+!
+no cdp log mismatch duplex
+no cdp run
+!
+route-map BACKUP-IN permit 10
+ set local-preference 200
+!
+route-map BACKUP-IN deny 20
+!
+route-map BACKUP-OUT permit 10
+ set as-path prepend 64700 64700 64700
+ --More--         !
+route-map BACKUP-OUT deny 20
+!
+route-map PRINCIPAL-IN permit 10
+ set local-preference 2000
+!
+route-map PRINCIPAL-IN deny 20
+!
+snmp-server community Puntonet.corp RO 1300
+!
+access-list 1300 permit 200.105.225.75
+access-list 1300 permit 190.110.195.82
+access-list 1300 permit 200.105.225.7
+access-list 1300 permit 200.105.237.5
+access-list 1300 permit 200.105.237.6
+access-list 1300 permit 190.12.35.242
+access-list 1300 permit 200.105.225.51
+access-list 1300 permit 200.105.228.198
+access-list 1300 permit 190.12.32.22
+access-list 1300 permit 190.12.32.31
+access-list 1300 permit 190.12.32.2
+access-list 1300 permit 190.12.14.2
+access-list 1300 permit 190.57.137.197
+ --More--         access-list 1300 permit 190.110.195.202
+access-list 1300 permit 190.57.153.230
+access-list 1300 permit 190.12.32.107
+access-list 1300 permit 200.105.224.136 0.0.0.7
+access-list 1300 permit 200.105.239.0 0.0.0.31
+access-list 1300 permit 172.29.171.0 0.0.0.255
+access-list 1300 deny   any
+access-list 107 deny   udp any eq ntp any eq ntp
+access-list 107 permit ip any any
+!
+!
+!
+control-plane
+!
+!
+!
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+ --More--         !
+!
+!
+!
+ vstack
+!
+line con 0
+ session-timeout 9  output
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport output none
+line 1
+ modem InOut
+ speed 115200
+ flowcontrol hardware
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ session-timeout 9  output
+ access-class accesoSSH in
+ --More--          exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport preferred none
+ transport input ssh
+ transport output none
+!
+!
+end
+
+1808439_ECOILPET#        

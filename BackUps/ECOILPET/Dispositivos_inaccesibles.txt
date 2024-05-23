@@ -1,0 +1,2 @@
+No se pudo conectar a 43807_1963584_Simetrico Corporativo Mensual (10 Mbps) CFC AGENCIA RIOBAMBA (Activo)(nan) : getaddrinfo() argument 1 must be string or None
+No se pudo conectar a 43807_1784606_Backup Simetrico Corporativo Mensual (30 Mbps) CFC GYE (Activo)(192.168.166.10) : [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder

@@ -1,0 +1,286 @@
+enable
+Password: 
+12121_1814505_SONORAMA_SA#show running-config
+Building configuration...
+
+
+Current configuration : 7782 bytes
+!
+! Last configuration change at 05:58:31 UTC Sat Apr 27 2024
+!
+version 16.9
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec
+service password-encryption
+no service dhcp
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+hostname 12121_1814505_SONORAMA_SA
+!
+boot-start-marker
+boot-end-marker
+!
+!
+security authentication failure rate 5 log
+ --More--         security passwords min-length 12
+logging buffered 16384 informational
+logging console critical
+no logging monitor
+enable secret 5 $1$hLlw$kJxH1JmWJ/xx2/t9sREP8/
+!
+aaa new-model
+aaa local authentication attempts max-fail 3
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+!
+aaa session-id common
+no ip source-route
+no ip icmp rate-limit unreachable
+!
+no ip bootp server
+no ip domain lookup
+ --More--         ip domain name puntonet.ec
+ip admission max-login-attempts 3
+ip dhcp bootp ignore
+!
+ip dhcp pool webuidhcp
+!
+!
+!
+login block-for 100 attempts 5 within 60
+login delay 5
+login on-failure log
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp mode transparent
+multilink bundle-name authenticated
+!
+ --More--         !
+!
+crypto pki trustpoint TP-self-signed-852894728
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-852894728
+ revocation-check none
+ rsakeypair TP-self-signed-852894728
+!
+!
+crypto pki certificate chain TP-self-signed-852894728
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 38353238 39343732 38301E17 0D323430 34313730 31343934 
+  375A170D 33303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3835 32383934 
+  37323830 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 8B91B39C 5C22EE79 A22F8658 09F42C48 5BB4388B CDE25BAC BBBC24F9 
+  39D14BD8 11FC51DF C933A78C D2B688C2 5FFB704C 177268D5 AAE1F8B5 76B4CE10 
+  851B5B8A 8CEE3EAA 627279EA B27FC0CE 17FEC68D 69F3634F C61F1187 18A17400 
+  B6C62E6F CEEA3236 F4597E58 F9DC398C 1AF46D3A 1226EAED FCAD9133 2D681CEF 
+  6B786402 D743D87A 05F93385 1EC68C2F C24B7E97 D8816304 BF8222EB 455D60C1 
+  DCCD25DE 7938A2F1 69A0B7A5 2C3B48C2 32DFB706 61CAF761 11FCCB87 9A901893 
+ --More--           871EBAE9 6E8DF5C7 2C3ADFA5 E2C97FC3 77F46425 AB06CAE9 BB382EC2 96639FAC 
+  47606F2C 34D959AB 245D44B4 9471F671 FC7C83C7 59742B98 2710C663 D195ED2B 
+  6B136AC1 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
+  0603551D 23041830 1680148B A356AE33 7BCA2F2A 7D5B631C A6FD5F55 D660EB30 
+  1D060355 1D0E0416 04148BA3 56AE337B CA2F2A7D 5B631CA6 FD5F55D6 60EB300D 
+  06092A86 4886F70D 01010505 00038201 010028D0 24643542 7E8CA221 3B6F4A26 
+  F35810B9 D25CB375 C79EBDDF A60E26E9 F65F9EAE B759A216 5F23527E 09C70180 
+  0BB3B169 05F7F2F4 F184E46D AB5FACFA F9C218E0 676C2DD0 4B24481C 82DA0B9F 
+  D163775D 2061100D D0FBB6E4 FC3F72E0 809B613F E1ACA1E6 931055A2 5B1665BD 
+  11733690 376A398F 401580DE 7F50118E 109F0686 9AD902C5 6BB315DC FC76551F 
+  F0CB8973 B55F0A47 D2E9841D 198C407B 4AE41273 48E21ADD F6213506 A59A5C7E 
+  A3EFD9AD D84FCC43 8197788B 058966DD E4DC91DE 97094BD8 9DFA1F56 505A3868 
+  1780F4BA D42F58AF 3744220D 32C4D0CE 57C76AED 1BCA6F70 D637B557 438AB837 
+  352B660F 3830D410 2DEA38AA BD423034 DA2D
+  	quit
+!
+license udi pid C1111-4P sn FGL2618LLZ2
+no license smart enable
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+ --More--         !
+username @1814505CORPuio secret 5 $1$WoXs$dJaFoPNQjfz8OBdorJ1ff.
+!
+redundancy
+ mode none
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 10 
+no cdp run
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ description WAN_PUNTONET
+ ip address 192.168.17.98 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ ip access-group 107 in
+ --More--          negotiation auto
+ ntp disable
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/1/0
+!
+interface GigabitEthernet0/1/1
+!
+interface GigabitEthernet0/1/2
+!
+interface GigabitEthernet0/1/3
+!
+interface Vlan1
+ description LAN CLIENTE
+ ip address 190.12.41.41 255.255.255.248
+ no ip redirects
+ no ip proxy-arp
+ ntp disable
+ no autostate
+!
+ --More--         ip forward-protocol nd
+ip tcp synwait-time 5
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 192.168.17.97
+ip route 10.0.0.0 255.0.0.0 Null0
+ip route 172.16.0.0 255.240.0.0 Null0
+ip route 192.168.0.0 255.255.0.0 Null0
+ip ssh time-out 60
+ip ssh authentication-retries 5
+ip ssh version 2
+!
+!
+ip access-list extended accesoSSH
+ permit tcp host 190.12.35.242 any eq 22
+ permit tcp host 190.12.37.22 any eq 22
+ permit tcp host 190.12.5.5 any eq 22
+ permit tcp host 190.12.14.8 any eq 22
+ permit tcp host 190.12.9.58 any eq 22
+ permit tcp host 200.105.239.5 any eq 22
+ permit tcp host 200.105.237.18 any eq 22
+ permit tcp host 190.12.56.2 any eq 22
+ permit tcp host 190.12.61.10 any eq 22
+ --More--          permit tcp host 190.110.218.19 any eq 22
+ permit tcp host 179.49.26.182 any eq 22
+ permit tcp host 192.168.177.98 any eq 22
+ permit tcp 200.105.225.0 0.0.0.255 any eq 22
+ permit tcp 200.105.224.136 0.0.0.7 any eq 22
+ deny   tcp any any eq 22
+!
+access-list 1300 permit 200.105.225.75
+access-list 1300 permit 190.110.195.82
+access-list 1300 permit 200.105.225.7
+access-list 1300 permit 200.105.237.5
+access-list 1300 permit 200.105.237.6
+access-list 1300 permit 190.12.35.242
+access-list 1300 permit 200.105.225.51
+access-list 1300 permit 200.105.228.198
+access-list 1300 permit 190.12.32.22
+access-list 1300 permit 190.12.32.31
+access-list 1300 permit 190.12.32.2
+access-list 1300 permit 190.12.14.2
+access-list 1300 permit 190.57.137.197
+access-list 1300 permit 190.110.195.202
+access-list 1300 permit 190.57.153.230
+access-list 1300 permit 190.12.32.107
+ --More--         access-list 1300 permit 200.105.224.136 0.0.0.7
+access-list 1300 permit 200.105.239.0 0.0.0.31
+access-list 1300 deny   any
+ip access-list extended 107
+ deny   udp any eq ntp any eq ntp
+ deny   tcp any host 190.12.41.42 eq 445
+ deny   tcp any host 190.12.41.42 eq 139
+ deny   udp any host 190.12.41.42 eq netbios-ns
+ deny   udp any host 190.12.41.42 eq netbios-dgm
+ deny   tcp any host 190.12.41.42 eq 138
+ deny   tcp any host 190.12.41.42 eq 137
+ deny   udp any host 190.12.41.42 eq 445
+ permit ip any any
+!
+!
+snmp-server community Puntonet.corp RO 1300
+!
+!
+!
+!
+control-plane
+!
+banner exec ^CC
+ --More--         
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner login ^CC
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner motd ^CC
+
+ --More--         
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+!
+line con 0
+ session-timeout 9  output
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport input none
+ transport output none
+ stopbits 1
+line vty 0 4
+ session-timeout 9  output
+ access-class accesoSSH in
+ exec-timeout 9 59
+ --More--          privilege level 0
+ logging synchronous
+ transport preferred none
+ transport input ssh
+ transport output none
+!
+!
+!
+!
+!
+!
+end
+
+12121_1814505_SONORAMA_SA#         

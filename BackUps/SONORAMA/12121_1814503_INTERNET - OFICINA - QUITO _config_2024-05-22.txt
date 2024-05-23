@@ -1,0 +1,267 @@
+enable
+Password: 
+RO_12121_1814503_SONORAMA_S.A_INTERNET#show running-config
+Building configuration...
+
+Current configuration : 5441 bytes
+!
+! No configuration change since last restart
+version 15.1
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec
+service password-encryption
+no service dhcp
+!
+hostname RO_12121_1814503_SONORAMA_S.A_INTERNET
+!
+boot-start-marker
+boot-end-marker
+!
+!
+security authentication failure rate 5 log
+security passwords min-length 12
+logging buffered 16384 informational
+logging console critical
+no logging monitor
+ --More--         enable secret 5 $1$EdGf$XAQIyb2LmpUqE4e88eKWq1
+!
+aaa new-model
+aaa local authentication attempts max-fail 3
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+aaa session-id common
+!
+crypto pki token default removal timeout 0
+!
+!
+no ip source-route
+no ip icmp rate-limit unreachable
+!
+!
+!
+ip dhcp bootp ignore
+!
+ --More--         !
+ip cef
+no ip bootp server
+no ip domain lookup
+ip domain name puntonet.ec
+login block-for 100 attempts 5 within 60
+login delay 5
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+license udi pid CISCO891-K9 sn FTX161483S4
+!
+!
+ --More--         vtp mode transparent
+username @1814503CORPuio secret 5 $1$GsOW$jteLtPl3YPONAmZ9IKmuq/
+!
+!
+!
+!
+vlan 10 
+!
+ip tcp synwait-time 5
+ip ssh time-out 60
+ip ssh authentication-retries 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+ --More--         !
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface FastEthernet4
+ no ip address
+!
+interface FastEthernet5
+ no ip address
+!
+interface FastEthernet6
+ no ip address
+!
+interface FastEthernet7
+ no ip address
+!
+interface FastEthernet8
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ --More--         !
+interface GigabitEthernet0
+ description WAN_PUNTONET
+ ip address 192.168.28.118 255.255.255.252
+ ip access-group 107 in
+ no ip redirects
+ no ip proxy-arp
+ duplex auto
+ speed auto
+ ntp disable
+!
+interface Vlan1
+ description LAN CLIENTE
+ ip address 190.12.38.81 255.255.255.248
+ no ip redirects
+ no ip proxy-arp
+ ntp disable
+!
+interface Async1
+ no ip address
+ encapsulation slip
+!
+ip forward-protocol nd
+!
+ --More--         !
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 192.168.28.117
+!
+ip access-list extended accesoSSH
+ permit tcp host 190.12.35.242 any eq 22
+ permit tcp host 190.12.37.22 any eq 22
+ permit tcp host 190.12.5.5 any eq 22
+ permit tcp host 190.12.14.8 any eq 22
+ permit tcp host 190.12.9.58 any eq 22
+ permit tcp host 200.105.239.5 any eq 22
+ permit tcp host 200.105.237.18 any eq 22
+ permit tcp host 190.12.56.2 any eq 22
+ permit tcp host 190.12.61.10 any eq 22
+ permit tcp host 190.110.218.19 any eq 22
+ permit tcp host 179.49.26.182 any eq 22
+ permit tcp host 192.168.28.117 any eq 22
+ permit tcp 200.105.225.0 0.0.0.255 any eq 22
+ permit tcp 200.105.224.136 0.0.0.7 any eq 22
+ deny   tcp any any eq 22
+!
+access-list 1300 permit 200.105.225.75
+access-list 1300 permit 190.110.195.82
+ --More--         access-list 1300 permit 200.105.225.7
+access-list 1300 permit 200.105.237.5
+access-list 1300 permit 200.105.237.6
+access-list 1300 permit 190.12.35.242
+access-list 1300 permit 200.105.225.51
+access-list 1300 permit 200.105.228.198
+access-list 1300 permit 190.12.32.22
+access-list 1300 permit 190.12.32.31
+access-list 1300 permit 190.12.32.2
+access-list 1300 permit 190.12.14.2
+access-list 1300 permit 190.57.137.197
+access-list 1300 permit 190.110.195.202
+access-list 1300 permit 190.57.153.230
+access-list 1300 permit 190.12.32.107
+access-list 1300 permit 200.105.224.136 0.0.0.7
+access-list 1300 permit 200.105.239.0 0.0.0.31
+access-list 1300 deny   any
+access-list 107 deny   udp any eq ntp any eq ntp
+access-list 107 deny   udp any host 190.12.38.84 eq 5353
+access-list 107 deny   tcp any host 190.12.38.84 eq 5353
+access-list 107 permit ip any any
+no cdp log mismatch duplex
+no cdp run
+!
+ --More--         !
+!
+!
+!
+snmp-server community Puntonet.corp RO 6
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+banner exec ^C
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+ --More--           criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner login ^C
+ 
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner motd ^C
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+ --More--         
+^C
+!
+line con 0
+ session-timeout 9  output
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport output none
+line 1
+ modem InOut
+ stopbits 1
+ speed 115200
+ flowcontrol hardware
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ session-timeout 9  output
+ access-class accesoSSH in
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ --More--          transport preferred none
+ transport input ssh
+ transport output none
+!
+end
+
+RO_12121_1814503_SONORAMA_S.A_INTERNET#          

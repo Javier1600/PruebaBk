@@ -1,0 +1,279 @@
+enable
+Password: 
+12121_1826237_SONORAMA_S.A_DATOS#show running-config
+Building configuration...
+
+  
+Current configuration : 4804 bytes
+!
+version 15.7
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec show-timezone
+service timestamps log datetime msec
+service password-encryption
+!
+hostname 12121_1826237_SONORAMA_S.A_DATOS
+!
+boot-start-marker
+boot system flash:c890-universalk9-mz.157-3.M4a.bin
+boot-end-marker
+!
+!
+security authentication failure rate 5 log
+security passwords min-length 12
+logging buffered 16384 informational
+logging console critical
+no logging monitor
+ --More--         enable secret 5 $1$tquG$0cf//GWwtMp0nlMGmTVMy1
+!
+aaa new-model
+aaa local authentication attempts max-fail 3
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+!
+aaa session-id common
+memory-size iomem 10
+!
+!
+!
+!
+!
+!
+!
+no ip source-route
+ --More--         no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+ip dhcp pool Prueba
+!
+!
+!
+no ip bootp server
+no ip domain lookup
+ip domain name puntonet.ec
+ip cef
+ --More--         login block-for 100 attempts 5 within 60
+login delay 5
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+license udi pid CISCO892-K9 sn FCZ172392VU
+!
+!
+username @1814515CORPuio secret 5 $1$vySs$v.t2wWUXHnbaOljnlnskl1
+username @1826237CORPuio secret 5 $1$9LNy$zdKkGzDC03GK/su9vumPZ0
+!
+ --More--         redundancy
+!
+!
+!
+!
+no cdp log mismatch duplex
+no cdp run
+!
+ip tcp synwait-time 5
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface BRI0
+ no ip address
+ encapsulation hdlc
+ shutdown
+ --More--          isdn termination multidrop
+!
+interface FastEthernet0
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet1
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet2
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet3
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet4
+ --More--          switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet5
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet6
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet7
+ switchport access vlan 10
+ switchport mode access
+ no ip address
+!
+interface FastEthernet8
+ no ip address
+ shutdown
+ duplex auto
+ --More--          speed auto
+!
+interface GigabitEthernet0
+ description WAN_PUNTONET
+ ip address 10.4.163.2 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ duplex auto
+ speed auto
+ ntp disable
+!
+interface Vlan1
+ description LAN CLIENTE
+ no ip address
+ no ip redirects
+ no ip proxy-arp
+ ntp disable
+!
+interface Vlan10
+ description LAN_CLIENTE
+ ip address 192.168.0.1 255.255.255.0
+ no autostate
+!
+ --More--         ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 10.4.163.1
+ip ssh time-out 60
+ip ssh authentication-retries 5
+ip ssh version 2
+!
+ip access-list extended accesoSSH
+ permit tcp 172.29.171.0 0.0.0.255 any eq 22
+ permit tcp host 10.4.163.1 any eq 22
+ deny   tcp any any eq 22
+!
+ipv6 ioam timestamp
+!
+snmp-server community Puntonet.corp RO 6
+!
+access-list 6 permit 172.29.171.0 0.0.0.255
+access-list 6 deny   any
+access-list 107 deny   udp any eq ntp any eq ntp
+access-list 107 permit ip any any
+ --More--         !
+!
+!
+control-plane
+!
+!
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+!
+!
+!
+!
+!
+banner exec ^C
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+ --More--         Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner login ^C
+ 
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+  criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+banner motd ^C
+
+                 UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+   You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or
+ --More--           criminal penalties. All activities performed on this device are logged and monitored.
+
+^C
+!
+line con 0
+ session-timeout 9  output
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport output none
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ session-timeout 9  output
+ access-class accesoSSH in
+ exec-timeout 9 59
+ privilege level 0
+ logging synchronous
+ transport preferred none
+ transport input ssh
+ --More--          transport output none
+!
+!
+end
+
+12121_1826237_SONORAMA_S.A_DATOS#         

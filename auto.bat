@@ -1,0 +1,1 @@
+"C:\Users\ernesto.andrade\AppData\Local\Programs\Python\Python39\python" "C:\Users\ernesto.andrade\Desktop\Prueba\ssh_connection.py"
