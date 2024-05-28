@@ -6,7 +6,7 @@ import pandas as pd
 import paramiko
 
 # Leer el archivo Excel
-EXCEL_FILE = 'C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\LLD_CS.xlsx'
+EXCEL_FILE = 'LLD_CS.xlsx'
 df = pd.ExcelFile(EXCEL_FILE)
 
 # Obtener las hojas del Excel
@@ -16,7 +16,7 @@ sheet_names = df.sheet_names
 date = datetime.now().strftime('%Y-%m-%d')
 
 # Carpeta base donde se guardarán los archivos de salida
-BASE_OUTPUT_FOLDER = 'C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\BackUps'
+BASE_OUTPUT_FOLDER = 'BackUps'
 
 # Iterar sobre cada hoja del Excel
 for sheet_name in sheet_names:
