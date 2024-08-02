@@ -4,13 +4,14 @@ import os
 from datetime import datetime
 import pandas as pd
 import paramiko
+import socket
 
 # Leer el archivo Excel
-df = pd.read_excel('C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\LLD_CS.xlsx',
-                   sheet_name="SONORAMA")
+df = pd.read_excel('C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\LLD_BPAC_AMERAFIN.xlsx',
+                   sheet_name="YOBEL")
 
 # Nombre de la carpeta donde se guardarán los archivos
-OUTPUT_FOLDER = 'C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\BackUps\\SONORAMA'
+OUTPUT_FOLDER = 'C:\\Users\\ernesto.andrade\\Desktop\\Prueba\\BackUps\\BK_YOBEL'
 
 # Obtener la fecha actual en formato YYYY-MM-DD
 date = datetime.now().strftime('%Y-%m-%d')
@@ -25,12 +26,12 @@ with open(nAccess, 'w', encoding="utf-8") as errors_file:
 
     # Extracción de datos de equipo
     for index, row in df.iterrows():
-        client = row['NOMBRE']
-        hostname = row['IP WAN CPE / 30']
-        username = row['USUARIO CPE']
-        password = row['CONTRASEÑA CPE']
+        client = row['PUNTO']
+        hostname = row['IP CPE']
+        username = row['USUARIO']
+        password = row['CONTRASEÑA']
         PORT = 22
-        enable_password = row['CONTRASEÑA CPE']
+        enable_password = row['CONTRASEÑA']
 
         # Crear un cliente SSH
         ssh_client = paramiko.SSHClient()
@@ -72,16 +73,16 @@ with open(nAccess, 'w', encoding="utf-8") as errors_file:
                     break
 
             # Nombrar el archivo de salida basado en el hostname
-            filename = os.path.join(OUTPUT_FOLDER, f"{client}config{date}.txt")
+            filename = os.path.join(OUTPUT_FOLDER, f"{client}_config_{date}.txt")
 
             # Escribir la salida en el archivo
             with open(filename, 'w', encoding="utf-8") as file:
                 file.write(OUTPUT)
 
-            print(f"Back up para {client}({hostname}) \nRuta al archivo: {filename}")
+            print(f"\nBack up para {client}({hostname}) \nRuta al archivo: {filename}\n")
         except (TimeoutError, TypeError, paramiko.ssh_exception.SSHException,
-                paramiko.ssh_exception.NoValidConnectionsError) as e:
-            error_message = f"No se pudo conectar a {client}({hostname}) : {str(e)}\n"
+                paramiko.ssh_exception.NoValidConnectionsError, socket.gaierror) as e:
+            error_message = f"\nNo se pudo conectar a {client}({hostname}) : {str(e)}\n"
             errors_file.write(error_message)
             print(error_message)
         finally:
