@@ -1,4 +1,0 @@
-# Ignorar todos los archivos .txt
-BackUps/
-/BackUps/*.txt
-
