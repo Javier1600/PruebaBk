@@ -75,13 +75,13 @@ def backup_fortigate_to_ftp_and_download(hostname, port, username, password, ftp
 
 # Configuración del dispositivo Fortigate y del servidor FTP
 hostname = '190.12.62.187'      # Dirección IP del Fortigate
-port = 22                     # Puerto SSH (por defecto es 22)
+port = 22                     # Puerto SSH
 username = 'admin'            # Usuario SSH
 password = 'FW_sail$$2020'         # Contraseña SSH
 
-ftp_server = 'ftp.example.com' # Dirección del servidor FTP
-ftp_username = 'ftp_user'     # Usuario FTP
-ftp_password = 'ftp_pass'     # Contraseña FTP
+ftp_server = '190.110.195.146' # Dirección del servidor FTP
+ftp_username = 'forti_mng'     # Usuario FTP
+ftp_password = 'FW_BK$$2024'     # Contraseña FTP
 backup_file = 'backup.conf'   # Nombre del archivo de respaldo en el servidor FTP
 local_file = 'fortigate_backup.conf'  # Archivo local donde se guardará el respaldo
 
