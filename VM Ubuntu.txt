@@ -1,6 +1,0 @@
-IP: 190.12.32.119
-Usuario: administrador
-Passwd: D1xu$0y45
-
-ACCESO VNC
-Passwd: Access33$$
