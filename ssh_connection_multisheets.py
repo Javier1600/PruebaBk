@@ -1,10 +1,55 @@
-"******Python script to generate backups of cisco equipment multisheets******"
 import time
 import os
 from datetime import datetime
 import pandas as pd
 import paramiko
+import ftplib
 
+# Función para asegurar que los directorios FTP existen
+def ensure_ftp_directories(ftp_server, ftp_username, ftp_password, directories):
+    try:
+        with ftplib.FTP(ftp_server) as ftp:  # Establece la sesión con el servidor FTP
+            ftp.login(user=ftp_username, passwd=ftp_password)  # Envío de credenciales al servidor
+            print(f"Conectado al servidor FTP: {ftp_server}\n")
+
+            for directory in directories:
+                try:
+                    # Intentar cambiar al directorio para verificar si existe
+                    ftp.cwd(directory)
+                    print(f"El directorio '{directory}' ya existe en el servidor FTP.\n")
+                except ftplib.error_perm:
+                    # Si el directorio no existe, se crea
+                    try:
+                        # Se crea el directorio y se navega a su interior
+                        parent_dir = os.path.dirname(directory)
+                        if parent_dir:
+                            ftp.cwd(parent_dir)
+                        ftp.mkd(directory)
+                        print(f"Directorio '{directory}' creado en el servidor FTP.\n")
+                        ftp.cwd(directory)
+                    except Exception as e:
+                        print(f"Error al crear el directorio '{directory}' en el servidor FTP: {e}\n")
+    except ftplib.all_errors as e:
+        print(f"Error al conectar al servidor FTP: {e}\n")
+
+# Función para subir archivos al servidor FTP
+def upload_files_to_ftp(local_folder, ftp_server, ftp_username, ftp_password, ftp_folder):
+    try:
+        with ftplib.FTP(ftp_server) as ftp:
+            ftp.login(user=ftp_username, passwd=ftp_password)
+            print(f"Conectado al servidor FTP: {ftp_server}")
+
+            # Cambiar al directorio FTP deseado
+            ftp.cwd(ftp_folder)
+
+            # Subir archivos desde la carpeta local
+            for filename in os.listdir(local_folder):
+                local_file_path = os.path.join(local_folder, filename)
+                with open(local_file_path, 'rb') as file:
+                    ftp.storbinary(f'STOR {filename}', file)
+                print(f"Archivo {filename} subido a {ftp_folder} en el servidor FTP.\n")
+    except ftplib.all_errors as e:
+        print(f"Error al subir archivos al servidor FTP: {e}\n")
 # Leer el archivo Excel
 EXCEL_FILE = 'LLD_CS.xlsx'
 df = pd.ExcelFile(EXCEL_FILE)
@@ -16,8 +61,14 @@ sheet_names = df.sheet_names
 date = datetime.now().strftime('%Y-%m-%d')
 
 # Carpeta base donde se guardarán los archivos de salida
-BASE_OUTPUT_FOLDER = 'BackUps'
+BASE_OUTPUT_FOLDER = 'FTP/BackUps'
 
+# Información del servidor FTP
+ftp_server = '190.110.195.146'
+ftp_username = 'forti_mng'
+ftp_password = 'FW_BK$$2024'
+
+ensure_ftp_directories(ftp_server, ftp_username, ftp_password, ['FTP', 'BackUps'])
 # Iterar sobre cada hoja del Excel
 for sheet_name in sheet_names:
     # Crear la carpeta correspondiente a la hoja si no existe
@@ -96,4 +147,12 @@ for sheet_name in sheet_names:
             finally:
                 # Asegurarse de que la conexión se cierra incluso si ocurre un error
                 ssh_client.close()
-                
+
+# Validar y crear directorios en el servidor FTP para cada hoja
+for sheet_name in sheet_names:
+    ftp_folder = f"/home/forti_mng/FTP/BackUps/BK_{sheet_name}_{date}"
+    ensure_ftp_directories(ftp_server, ftp_username, ftp_password, [ftp_folder])
+
+    # Subir los archivos de la carpeta local correspondiente al FTP
+    local_folder = os.path.join(BASE_OUTPUT_FOLDER, f"{sheet_name}_{date}")
+    upload_files_to_ftp(local_folder, ftp_server, ftp_username, ftp_password, ftp_folder)
