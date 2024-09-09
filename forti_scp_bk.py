@@ -46,12 +46,12 @@ def backup_fortigate(hostname, port, username, password, backup_file, local_file
             ssh.close()
 
 # Configuración del dispositivo Fortigate
-hostname = '190.12.62.187'  # Dirección IP del Fortigate
+hostname = 'XXX.XXX.XXX.XXX'  # Dirección IP del Fortigate
 port = 22                 # Puerto SSH (por defecto es 22)
-username = 'admin'        # Usuario SSH
-password = 'FW_sail$$2020'     # Contraseña SSH
+username = 'user'        # Usuario SSH
+password = 'password'     # Contraseña SSH
 backup_file = 'backup.conf'  # Nombre del archivo de respaldo en el Fortigate
-local_file = 'FW_HOTEL_SAIL_PLAZA_backup.conf'  # Archivo local donde se guardará el respaldo
+local_file = 'backup.conf'  # Archivo local donde se guardará el respaldo
 
 # Realizar el backup
 backup_fortigate(hostname, port, username, password, backup_file, local_file)
