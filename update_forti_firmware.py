@@ -66,9 +66,9 @@ username = 'admin'              # Usuario SSH
 password = 'FW_sail$$2020'      # Contraseña SSH
 
 # Configuración del servidor FTP
-ftp_server = '190.110.195.146'
-ftp_username = 'forti_mng'
-ftp_password = 'FW_BK$$2024'
+ftp_server = 'XXX.XXX.XXX.XXX'
+ftp_username = 'user'
+ftp_password = 'password'
 ftp_file_path = '/home/forti_mng/FTP/Forti_Images/fortigate_firmware_image.out'
 local_file_path = 'fortigate_firmware_image.out'  # Ruta local del archivo de firmware
 

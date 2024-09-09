@@ -64,9 +64,9 @@ date = datetime.now().strftime('%Y-%m-%d')
 BASE_OUTPUT_FOLDER = 'FTP/BackUps'
 
 # Información del servidor FTP
-ftp_server = '190.110.195.146'
-ftp_username = 'forti_mng'
-ftp_password = 'FW_BK$$2024'
+ftp_server = 'XXX.XXX.XXX.XXX'
+ftp_username = 'user'
+ftp_password = 'password'
 
 ensure_ftp_directories(ftp_server, ftp_username, ftp_password, ['FTP', 'BackUps'])
 # Iterar sobre cada hoja del Excel

@@ -1,7 +1,0 @@
-No se pudo conectar a 12121_1814507_INTERNET-JAPON Y AMAZONAS - QUITO(200.105.230.220) : [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
-No se pudo conectar a 12121_1814510_INTERNET-OFICINA - AMBATO (190.110.219.94) : [Errno None] Unable to connect to port 22 on 190.110.219.94
-No se pudo conectar a 12121_1814511_INTENET-OFICINA -CUENCA (192.168.39.14) : Authentication failed.
-No se pudo conectar a 12121_1814512_INTERNET - MODESTO CHAVEZ Y ALBERTO EINSTEIN CONJUNTO SHLETON (179.49.5.132) : [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
-No se pudo conectar a 12121_1814514_INTERNET - TUMBACO (190.12.40.22) : [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
-No se pudo conectar a 12121_1817538_INTERNET - GYE - SAMBORONDON (192.168.168.218) : Authentication failed.
-No se pudo conectar a 12121_1814508_INTERNET- CERRO AZUL - GUAYAQUIL(nan) : getaddrinfo() argument 1 must be string or None

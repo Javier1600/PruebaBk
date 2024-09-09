@@ -1,6 +1,0 @@
-No se pudo conectar a CFC AGENCIA RIOBAMBA :(nan) : getaddrinfo() argument 1 must be string or None
-
-No se pudo conectar a  CFC AGENCIA MANTA:(192.168.52.98) : Authentication failed.
-
-No se pudo conectar a CFC GYE :(192.168.166.10) : [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
-

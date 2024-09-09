@@ -130,9 +130,9 @@ with open(nAccess, 'w', encoding="utf-8") as errors_file:
             ssh_client.close()
 
 # Validar y crear directorios en el servidor FTP
-ftp_server = '190.110.195.146'
-ftp_username = 'forti_mng'
-ftp_password = 'FW_BK$$2024'
+ftp_server = 'XXX.XXX.XXX.XXX'
+ftp_username = 'user'
+ftp_password = 'password'
 ensure_ftp_directories(ftp_server, ftp_username, ftp_password, ['FTP', 'BackUps',f'BK_SIMED_{date}'])
 
 # Llamar a la función para subir los archivos
