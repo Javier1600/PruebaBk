@@ -214,9 +214,9 @@ def main():
     workbook, sheet, firewall_data_list = read_firewall_data_from_excel(excel_file)
 
     # Valores predeterminados del servidor FTP
-    ftp_server = '190.110.195.146'
-    ftp_username = 'forti_mng'
-    ftp_password = 'FW_BK$$2024'
+    ftp_server = 'XXX.XXX.XXX.XXX'
+    ftp_username = 'user'
+    ftp_password = 'password'
     # Ciclo for para recorrer todas las entradas en el diccionario
     for data in firewall_data_list:
         plan = data['PLAN']
