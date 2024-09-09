@@ -60,10 +60,10 @@ def upgrade_firmware_via_ftp(ssh, ftp_server, ftp_file_path):
         print(f"Error durante la actualización del firmware: {e}")
 
 # Configuración del Fortigate
-fortigate_ip = '190.12.62.187'  # Dirección IP del Fortigate
+fortigate_ip = 'XXX.XXX.XXX.XXX'  # Dirección IP del Fortigate
 port = 22                       # Puerto SSH
-username = 'admin'              # Usuario SSH
-password = 'FW_sail$$2020'      # Contraseña SSH
+username = 'user'              # Usuario SSH
+password = 'password'      # Contraseña SSH
 
 # Configuración del servidor FTP
 ftp_server = 'XXX.XXX.XXX.XXX'
